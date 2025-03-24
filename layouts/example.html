@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LoveBridge - Navbar con Modo Oscuro</title>
+  <title>LoveBridge - Layout Completo</title>
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -13,12 +14,22 @@
     rel="stylesheet"
   >
   <style>
+    /* Aseguramos que html y body ocupen 100% de la altura */
+    html, body {
+      height: 100%;
+    }
+    /* Body: aplicamos padding interno y lo convertimos en contenedor flex */
     body {
       font-family: 'Poppins', sans-serif;
       background-color: var(--cloud-white);
       transition: background-color 0.3s, color 0.3s;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      margin: 0;
     }
-    /* --- Variables de color modo claro --- */
+    /* Variables modo claro */
     :root {
       --warm-rose: #FF6B6C;
       --soft-peach: #FFD9D7;
@@ -28,17 +39,17 @@
       --navbar-bg: var(--soft-peach);
       --dropdown-bg: var(--cloud-white);
     }
-    /* --- Variables de color modo oscuro --- */
+    /* Variables modo oscuro */
     body.dark-mode {
       --warm-rose: #FF6B6C;
-      --soft-peach: #4A3F41;
-      --cloud-white: #2E2E2E;
-      --deep-cocoa: #D3B8A0;
+      --soft-peach: #4A3F41; /* Variante oscura inspirada en deep cocoa */
+      --cloud-white: #2E2E2E; /* Fondo oscuro */
+      --deep-cocoa: #D3B8A0; /* Texto claro y cálido */
       --text-color: var(--deep-cocoa);
       --navbar-bg: var(--soft-peach);
       --dropdown-bg: #3A3A3A;
     }
-    /* --- Navbar personalizado --- */
+    /* Navbar */
     .navbar-lovebridge {
       background-color: var(--navbar-bg);
     }
@@ -55,21 +66,17 @@
     .navbar-lovebridge .navbar-nav .nav-link:focus {
       color: var(--warm-rose);
     }
-    /* --- Botón toggler mejorado --- */
+    /* Botón toggler con ícono hamburguesa */
     .navbar-toggler {
       border: 1px solid var(--deep-cocoa);
-      background-color: var(--soft-peach);
+      background-color: var(--cloud-white);
       border-radius: 5px;
       padding: 0.5rem 0.75rem;
       transition: background-color 0.3s, border-color 0.3s;
     }
-    .navbar-toggler:focus {
-      box-shadow: none;
-    }
     .navbar-toggler:hover {
-      
-      background-color: var(--warm-rose);
-      border-color: var(--warm-rose);
+      background-color: var(--soft-peach);
+      border-color: var(--soft-peach);
     }
     body.dark-mode .navbar-toggler {
       background-color: var(--dropdown-bg);
@@ -79,7 +86,9 @@
       background-color: var(--warm-rose);
       border-color: var(--warm-rose);
     }
-    /* --- Ícono de hamburguesa con tres líneas --- */
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }   
     .navbar-toggler-icon {
       display: inline-block;
     }
@@ -91,7 +100,7 @@
       margin: 4px 0;
       transition: background-color 0.3s;
     }
-    /* --- Dropdown Menu --- */
+    /* Dropdown Menu */
     .navbar-lovebridge .dropdown-menu {
       background-color: var(--dropdown-bg);
       border: 1px solid var(--soft-peach);
@@ -105,7 +114,7 @@
       background-color: var(--warm-rose);
       color: #fff;
     }
-    /* --- Estilos para botones de autenticación --- */
+    /* Botones de autenticación */
     .auth-buttons .btn {
       border-color: var(--deep-cocoa);
       color: var(--deep-cocoa);
@@ -117,7 +126,7 @@
       color: #fff;
       border-color: var(--warm-rose);
     }
-    /* --- Botón de Modo Oscuro --- */
+    /* Botón de modo oscuro */
     .mode-toggle {
       border: none;
       background-color: transparent;
@@ -129,13 +138,45 @@
     .mode-toggle:hover {
       color: var(--warm-rose);
     }
-    .nav-title:hover {
-      color: var(--warm-rose);
+    /* Main: sección principal ocupa el espacio restante */
+    main {
+      flex: 1;
+      padding: 3rem 0;
+    }
+    .hero-text h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--deep-cocoa);
+    }
+    .hero-text h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--deep-cocoa);
+      margin-top: 1rem;
+    }
+    .hero-text p {
+      font-size: 1rem;
+      color: var(--deep-cocoa);
+      margin-top: 1rem;
+      line-height: 1.5;
+    }
+    /* Footer */
+    .footer-lovebridge {
+      background-color: var(--soft-peach);
+      color: var(--deep-cocoa);
+    }
+    .footer-lovebridge a {
+      color: var(--deep-cocoa);
+      text-decoration: none;
       transition: color 0.3s;
+    }
+    .footer-lovebridge a:hover {
+      color: var(--warm-rose);
     }
   </style>
 </head>
 <body>
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-lovebridge">
     <div class="container-fluid">
       <a class="navbar-brand d-flex align-items-center" href="#">
@@ -146,7 +187,7 @@
           height="70" 
           class="me-2"
         >
-        <span class="nav-title">LoveBridge</span>
+        <span>LoveBridge</span>
       </a>
       <button 
         class="navbar-toggler" 
@@ -157,8 +198,7 @@
         aria-expanded="false" 
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon">
-        </span>
+        <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto me-3">
@@ -192,24 +232,80 @@
             <a class="nav-link" href="#">Contacto</a>
           </li>
         </ul>
-        <!-- Botones de autenticación -->
         <div class="d-flex auth-buttons align-items-center">
           <button type="button" class="btn btn-outline-dark me-2">Login</button>
           <button type="button" class="btn btn-outline-dark me-2">Register</button>
           <button type="button" class="btn btn-outline-dark me-2">Logout</button>
-          <!-- Botón para alternar modo oscuro -->
           <button type="button" class="mode-toggle" id="modeToggle">Modo Oscuro</button>
         </div>
       </div>
     </div>
   </nav>
 
+  <!-- Main: Sección principal con dos columnas -->
+  <main class="container my-5">
+    <div class="row align-items-center">
+      <!-- Columna de texto -->
+      <div class="col-md-6 hero-text">
+        <h1>Conecta tus emociones, estés donde estés</h1>
+        <h2>Descubre la magia de sentirte cerca, incluso en la distancia</h2>
+        <p>
+          En LoveBridge, transformamos la distancia en oportunidad. Comparte momentos divertidos, crea rituales de pareja y mantén la chispa viva a golpe de clic. ¡Regístrate ahora y descubre cómo fortalecer tu relación sin importar cuántos kilómetros os separen!
+        </p>
+      </div>
+      <!-- Columna de imagen -->
+      <div class="col-md-6 text-center">
+        <img 
+          src="img/pareja-feliz.png" 
+          alt="Pareja a distancia feliz" 
+          class="img-fluid rounded"
+        >
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-lovebridge py-4">
+    <div class="container">
+      <div class="row">
+        <!-- Información de la marca -->
+        <div class="col-md-4 mb-3">
+          <h5 class="text-uppercase">LoveBridge</h5>
+          <p>
+            Red social para parejas a distancia, conectando corazones y creando puentes de amor.
+          </p>
+        </div>
+        <!-- Enlaces rápidos -->
+        <div class="col-md-4 mb-3">
+          <h5 class="text-uppercase">Enlaces</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Cómo Funciona</a></li>
+            <li><a href="#">Planes</a></li>
+          </ul>
+        </div>
+        <!-- Contacto y políticas -->
+        <div class="col-md-4 mb-3">
+          <h5 class="text-uppercase">Contacto</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">Soporte</a></li>
+            <li><a href="#">Privacidad</a></li>
+            <li><a href="#">Términos</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="text-center">
+        &copy; 2025 LoveBridge. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
   <!-- Bootstrap JS Bundle -->
   <script 
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
   ></script>
   <script>
-    // Script para alternar entre modo claro y oscuro
+    // Alternar modo oscuro/claro
     const modeToggle = document.getElementById('modeToggle');
     modeToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');

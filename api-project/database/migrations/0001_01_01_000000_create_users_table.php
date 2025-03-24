@@ -17,9 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->foreignId('couple_id')->nullable()->constrained('users'); // <- Aquí tu campo personalizado
+            $table->foreignId('couple_id')->nullable()->constrained('users')->onDelete('set null');
             $table->rememberToken();
             $table->timestamps();
+
+            
         });
     
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -36,6 +38,19 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        Schema::create('profiles', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('background_img', 255)->nullable();
+            $table->text('bio')->nullable();
+            $table->string('avatar', 255)->nullable();
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->timestamps();
+
+            $table->foreign('user_id')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
+        });
     }
 
     /**
@@ -46,5 +61,6 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('profiles');
     }
 };
