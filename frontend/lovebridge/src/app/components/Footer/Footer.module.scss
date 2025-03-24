@@ -1,0 +1,12 @@
+.footer-lovebridge {
+    background-color: var(--soft-peach);
+    color: var(--deep-cocoa);
+  }
+  .footer-lovebridge_link {
+    color: var(--deep-cocoa);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-lovebridge_link:hover {
+    color: var(--warm-rose);
+  }

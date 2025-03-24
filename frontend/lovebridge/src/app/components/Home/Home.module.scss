@@ -1,0 +1,43 @@
+.main {
+    flex: 1;
+    padding: 3rem 0;
+  }
+  
+  /* Animación para el texto */
+  .heroText {
+    opacity: 0;
+    animation: slideInLeft 1s ease forwards;
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+
+  .heroText h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--deep-cocoa);
+  }
+  
+  .heroText h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--deep-cocoa);
+    margin-top: 1rem;
+  }
+  
+  .heroText p {
+    font-size: 1rem;
+    color: var(--deep-cocoa);
+    margin-top: 1rem;
+    line-height: 1.5;
+  }
+  

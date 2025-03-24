@@ -1,0 +1,61 @@
+.main {
+    flex: 1;
+    padding: 3rem 0;
+  }
+  
+  /* Tarjeta de cada plan */
+  .planCard {
+    margin-bottom: 2rem;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  
+  /* Título del plan */
+  .planTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--deep-cocoa);
+    margin-bottom: 1rem;
+  }
+  
+  /* Precio del plan */
+  .planPrice {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--warm-rose);
+    margin-bottom: 1rem;
+  }
+  
+  /* Lista de características */
+  .planFeatures {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    
+    li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #ddd;
+      
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+  
+  /* Botón para elegir plan */
+  .planButton {
+    color: var(--deep-cocoa);
+    border-color: var(--deep-cocoa);
+    transition: background-color 0.3s, color 0.3s;
+    
+    &:hover {
+      background-color: var(--warm-rose);
+      color: white;
+    }
+  }
+  

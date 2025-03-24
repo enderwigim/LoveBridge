@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+:root {
+  --warm-rose: #FF6B6C;
+  --soft-peach: #FFD9D7;
+  --cloud-white: #FFF7F6;
+  --deep-cocoa: #4E4039;
+}
+
+$warm-rose: #FF6B6C;
+$soft-peach: #FFD9D7;
+$cloud-white: #FFF7F6;
+$deep-cocoa: #4E4039;
+
+$primary: $warm-rose;
+$body-bg: $cloud-white;
+$font-family-base: 'Poppins', sans-serif;
+
+// 3. Importa Bootstrap (opcional: importa solo lo necesario)
+@import "~bootstrap/scss/bootstrap";
+
+
+
+/* Aseguramos que html y body ocupen 100% de la altura */
+html, body {
+  height: 100%;
+}
+/* Body: aplicamos padding interno y lo convertimos en contenedor flex */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--cloud-white);
+  transition: background-color 0.3s, color 0.3s;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 0;
+}

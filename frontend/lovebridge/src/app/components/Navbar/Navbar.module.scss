@@ -1,0 +1,67 @@
+// Estilos específicos para el Navbar (no afectan otros componentes)
+.navbarLovebridge {
+  background-color: var(--soft-peach) !important;
+  border-radius: 10px 10px 0px 0px; // Bordes de abajo rectos
+
+  .navbarBrand {
+    color: var(--deep-cocoa) !important;
+    font-weight: 700;
+  }
+
+  .navLink {
+    color: var(--deep-cocoa) !important;
+    font-weight: 500;
+    transition: color 0.3s;
+
+    &:hover, &:focus {
+      color: var(--warm-rose) !important;
+    }
+  }
+
+
+
+  .navbarToggler {
+    border: none;
+    outline: none;
+    box-shadow: none;
+  
+    &:focus,
+    &:active {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+
+  .dropdownMenu {
+    background-color: var(--cloud-white) !important;
+    border: 1px solid var(--soft-peach) !important;
+  }
+
+  .dropdownItem {
+    color: var(--deep-cocoa) !important;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover, &:focus {
+      background-color: var(--warm-rose) !important;
+      color: white !important;
+    }
+  }
+}
+
+
+// Botones de autenticación (opcional)
+.authButtons {
+  .btn {
+    border-color: var(--deep-cocoa);
+    color: var(--deep-cocoa);
+    background-color: transparent;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: var(--warm-rose);
+      color: white;
+      border-color: var(--warm-rose);
+    }
+  }
+}
