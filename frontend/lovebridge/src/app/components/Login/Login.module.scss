@@ -1,0 +1,21 @@
+.loginContainer {
+    padding: 3rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 150px); // Ajusta el valor según la altura de tu Navbar y Footer
+  }
+  
+  .loginForm {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: var(--cloud-white);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .loginButton {
+    width: 100%;
+  }

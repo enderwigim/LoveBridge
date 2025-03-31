@@ -36,7 +36,7 @@ export default function NavBar() {
         <div className={`collapse navbar-collapse ${styles.navbarCollapse}`} id="navbarNav">
           <ul className="navbar-nav ms-auto me-3">
             <li className="nav-item">
-              <Link className={`nav-link ${styles.navLink}`} href="/planes">
+              <Link className={`nav-link ${styles.navLink}`} href="/pricing">
                 Planes
               </Link>
             </li>
@@ -80,9 +80,9 @@ export default function NavBar() {
           <div className={`d-flex ${styles.authButtons}`}>
             {!isLoggedIn ? (
               <>
-                <button type="button" className="btn btn-outline me-2">
+                <Link className="btn btn-outline me-2" href={"/login"}>
                   Login
-                </button>
+                </Link>
                 <button type="button" className="btn btn-outline me-2">
                   Register
                 </button>
