@@ -8,9 +8,8 @@ export const loginService = async (email, password) => {
       email,
       password,
     });
-    return response.data; // aquí vendría el token
+    return response.data;
   } catch (error) {
-    // Puedes personalizar el mensaje según el error
     throw error.response?.data?.message || 'Error al iniciar sesión';
   }
 };
@@ -23,10 +22,9 @@ export const registerService = async (name, email, password, password_confirmati
             password,
             password_confirmation
         });
-        return response.data; // aquí vendría el token o la respuesta del registro
+        return response.data;
         
     }   catch (error) {
-        // Puedes personalizar el mensaje según el error
         throw error.response?.data?.message || 'Error al iniciar sesión';
     }
 }

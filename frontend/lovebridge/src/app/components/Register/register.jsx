@@ -36,7 +36,7 @@ export default function Register() {
           console.error(err);
           setError(err); // Mostrar mensaje al usuario
         }
-    // Aquí puedes agregar la lógica de registro (ej. llamada a una API)
+    
     console.log('Datos de registro:', { name, email, password });
   };
 
