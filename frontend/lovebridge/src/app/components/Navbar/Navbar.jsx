@@ -58,8 +58,8 @@ export default function NavBar() {
                   </Link>
                 </li>
                 <li>
-                  <Link className={`dropdown-item ${styles.dropdownItem}`} href="/eventos">
-                    Eventos
+                  <Link className={`dropdown-item ${styles.dropdownItem}`} href="/blog">
+                    Blog
                   </Link>
                 </li>
                 <li>
@@ -80,12 +80,12 @@ export default function NavBar() {
           <div className={`d-flex ${styles.authButtons}`}>
             {!isLoggedIn ? (
               <>
-                <Link className="btn btn-outline me-2" href={"/login"}>
-                  Login
+                <Link className={`btn btn-outline me-2 ${styles.navLink}`} href={"/login"}>
+                  Iniciar Sesión
                 </Link>
-                <button type="button" className="btn btn-outline me-2">
-                  Register
-                </button>
+                <Link className={`btn btn-outline me-2 ${styles.navLink}`} href={"/register"}>
+                  Registrarse
+                </Link>
               </>
             ) : (
               <button type="button" className="btn btn-outline">
