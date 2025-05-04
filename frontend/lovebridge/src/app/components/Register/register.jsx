@@ -3,18 +3,39 @@ import { useState } from 'react';
 import Link from 'next/link';
 import styles from './Register.module.scss';
 
+// Se importa el router de next/navigation para redirigir al usuario después de iniciar sesión
+import { useRouter } from 'next/navigation';
+// Se importa el contexto de autentificación, y además el servicio de login.
+import { useAuth } from '../../../context/AuthContext';
+import { registerService } from '../../../services/authService';
+
 export default function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const router = useRouter();
+  const { login } = useAuth();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert("Las contraseñas no coinciden");
+      setError('Las contraseñas no coinciden');
       return;
     }
+    try {
+          const data = await registerService(name, email, password, confirmPassword);
+          console.log("Token recibido:", data.token);
+          // Guardamos el token en el localStorage en un contexto global.
+          login(data.token);
+          // Redigir al usuario a la pagina de inicio.
+          router.push('/');
+        } catch (err) {
+          console.error(err);
+          setError(err); // Mostrar mensaje al usuario
+        }
     // Aquí puedes agregar la lógica de registro (ej. llamada a una API)
     console.log('Datos de registro:', { name, email, password });
   };
@@ -75,6 +96,11 @@ export default function Register() {
       <div className="text-center mt-3">
         ¿Ya tienes cuenta? <Link href="/login">Inicia Sesión</Link>
       </div>
+      {error && (
+        <div className="alert alert-danger mt-3 text-center">
+          {error}
+        </div>
+      )}
     </form>
   );
 }

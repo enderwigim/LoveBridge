@@ -18,7 +18,9 @@ class UserController extends Controller
         $data = $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6'
+            'password' => 'required|min:6',
+            'role' => 'nullable|string|in:usuario,admin,psicologo',
+            
         ]);
 
         $data['password'] = Hash::make($data['password']);
@@ -55,5 +57,22 @@ class UserController extends Controller
     {
         $user->delete();
         return response()->json(null, 204);
+    }
+
+    // En UserController.php
+    public function updateRole(Request $request, User $user)
+    {
+        $request->validate([
+            'role' => 'required|in:usuario,admin,psicologo' 
+        ]);
+
+        // Verifica si el usuario autenticado es admin
+        if ($request->user()->role !== 'admin') {
+            abort(403, 'Solo los admins pueden cambiar roles');
+        }
+
+        $user->update(['role' => $request->role]);
+        
+        return response()->json(['message' => 'Rol actualizado']);
     }
 }

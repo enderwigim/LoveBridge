@@ -3,6 +3,7 @@ import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 import { Geist, Geist_Mono } from "next/font/google";
 import BootstrapClient from './components/BootstrapClient';
+import { AuthProvider } from '../context/AuthContext';
 import "./globals.scss";
 
 const geistSans = Geist({
@@ -28,10 +29,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        {children}
-        <Footer /> 
-        <BootstrapClient /> {/* Inicializa bootstrap */}
+        <AuthProvider>
+            <Navbar />
+            {children}
+            <Footer />
+            <BootstrapClient />
+          </AuthProvider>
       </body>
     </html>
   );

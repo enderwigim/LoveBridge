@@ -1,12 +1,21 @@
 "use client";
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Navbar.module.scss';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '../../../context/AuthContext';
 
 
 export default function NavBar() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const { isLoggedIn, logout } = useAuth();
+    const router = useRouter();
+
+    const handleLogout = () => {
+      logout();
+      router.push('/');
+    };
+
     return(
         <nav className={`navbar navbar-expand-lg ${styles.navbarLovebridge}`}>
       <div className="container-fluid">
@@ -88,7 +97,7 @@ export default function NavBar() {
                 </Link>
               </>
             ) : (
-              <button type="button" className="btn btn-outline">
+              <button type="button" className="btn btn-outline" onClick={handleLogout}>
                 Logout
               </button>
             )}

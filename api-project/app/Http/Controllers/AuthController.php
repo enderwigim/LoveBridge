@@ -16,13 +16,15 @@ class AuthController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|min:8|confirmed'
+            'password' => 'required|string|min:8|confirmed',
+            'role' => 'nullable|string|in:usuario,admin,psicologo',
         ]);
-        // Crea un usuario en la base de datos.
+        // Crea un usuario en la base de datos, y le asigna el rol de usuario por defecto.
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
-            'password' => Hash::make($validated['password'])
+            'password' => Hash::make($validated['password']),
+            'role' => $validated['role'] ?? 'usuario', 
         ]);
         // Devuelve 201 y el token de autenticación
         return response()->json([
@@ -53,6 +55,7 @@ class AuthController extends Controller
         // Crea un token y lo devuelve.
         return response()->json([
             'token' => $user->createToken('auth_token')->plainTextToken,
+            'user' => $user->makeVisible(['role']), 
             "message" => "Login exitoso",
         ], 200);
     }
