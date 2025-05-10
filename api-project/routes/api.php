@@ -38,6 +38,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+    // Ruta que devuelve el perfil del usuario autentificado.
+    Route::get('/profiles/{profile}', [ProfileController::class, 'show']);
     Route::apiResource('profiles', ProfileController::class);
     
     // Tus rutas existentes

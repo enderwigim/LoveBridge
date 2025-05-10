@@ -21,8 +21,11 @@ class Profile extends Model
         'user_id',
     ];
 
+    // Obtiene el usuario asociado al perfil.
     /**
-     * Obtiene el usuario al que pertenece el perfil.
+     * Obtiene el usuario asociado al perfil.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {

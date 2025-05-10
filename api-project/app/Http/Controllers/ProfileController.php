@@ -21,10 +21,11 @@ class ProfileController extends Controller
 
         return response()->json($profile, 201);
     }
-
+    // Función para mostrar el perfil de un usuario específico.
     public function show(Profile $profile)
     {
-        return response()->json($profile);
+        // Carga la relación con el usuario y devuelve el perfil.
+        return response()->json($profile->load('user:name,couple_id'));
     }
 
     public function update(Request $request, Profile $profile)
