@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LoveBridge - Layout Completo</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+    rel="stylesheet"
+  >
+  <style>
+    /* Aseguramos que html y body ocupen 100% de la altura */
+    html, body {
+      height: 100%;
+    }
+    /* Body: aplicamos padding interno y lo convertimos en contenedor flex */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--cloud-white);
+      transition: background-color 0.3s, color 0.3s;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      margin: 0;
+    }
+    /* Variables modo claro */
+    :root {
+      --warm-rose: #FF6B6C;
+      --soft-peach: #FFD9D7;
+      --cloud-white: #FFF7F6;
+      --deep-cocoa: #4E4039;
+      --text-color: var(--deep-cocoa);
+      --navbar-bg: var(--soft-peach);
+      --dropdown-bg: var(--cloud-white);
+    }
+    /* Variables modo oscuro */
+    body.dark-mode {
+      --warm-rose: #FF6B6C;
+      --soft-peach: #4A3F41; /* Variante oscura inspirada en deep cocoa */
+      --cloud-white: #2E2E2E; /* Fondo oscuro */
+      --deep-cocoa: #D3B8A0; /* Texto claro y cálido */
+      --text-color: var(--deep-cocoa);
+      --navbar-bg: var(--soft-peach);
+      --dropdown-bg: #3A3A3A;
+    }
+    /* Navbar */
+    .navbar-lovebridge {
+      background-color: var(--navbar-bg);
+    }
+    .navbar-lovebridge .navbar-brand {
+      color: var(--deep-cocoa);
+      font-weight: 700;
+    }
+    .navbar-lovebridge .navbar-nav .nav-link {
+      color: var(--deep-cocoa);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .navbar-lovebridge .navbar-nav .nav-link:hover,
+    .navbar-lovebridge .navbar-nav .nav-link:focus {
+      color: var(--warm-rose);
+    }
+    /* Botón toggler con ícono hamburguesa */
+    .navbar-toggler {
+      border: 1px solid var(--deep-cocoa);
+      background-color: var(--cloud-white);
+      border-radius: 5px;
+      padding: 0.5rem 0.75rem;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+    .navbar-toggler:hover {
+      background-color: var(--soft-peach);
+      border-color: var(--soft-peach);
+    }
+    body.dark-mode .navbar-toggler {
+      background-color: var(--dropdown-bg);
+      border: 1px solid var(--deep-cocoa);
+    }
+    body.dark-mode .navbar-toggler:hover {
+      background-color: var(--warm-rose);
+      border-color: var(--warm-rose);
+    }
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }   
+    .navbar-toggler-icon {
+      display: inline-block;
+    }
+    .navbar-toggler-icon .line {
+      display: block;
+      width: 1.25rem;
+      height: 2px;
+      background-color: var(--deep-cocoa);
+      margin: 4px 0;
+      transition: background-color 0.3s;
+    }
+    /* Dropdown Menu */
+    .navbar-lovebridge .dropdown-menu {
+      background-color: var(--dropdown-bg);
+      border: 1px solid var(--soft-peach);
+    }
+    .navbar-lovebridge .dropdown-item {
+      color: var(--deep-cocoa);
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .navbar-lovebridge .dropdown-item:hover,
+    .navbar-lovebridge .dropdown-item:focus {
+      background-color: var(--warm-rose);
+      color: #fff;
+    }
+    /* Botones de autenticación */
+    .auth-buttons .btn {
+      border-color: var(--deep-cocoa);
+      color: var(--deep-cocoa);
+      background-color: transparent;
+      transition: all 0.3s;
+    }
+    .auth-buttons .btn:hover {
+      background-color: var(--warm-rose);
+      color: #fff;
+      border-color: var(--warm-rose);
+    }
+    /* Botón de modo oscuro */
+    .mode-toggle {
+      border: none;
+      background-color: transparent;
+      color: var(--deep-cocoa);
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .mode-toggle:hover {
+      color: var(--warm-rose);
+    }
+    /* Main: sección principal ocupa el espacio restante */
+    main {
+      flex: 1;
+      padding: 3rem 0;
+    }
+    .hero-text h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--deep-cocoa);
+    }
+    .hero-text h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--deep-cocoa);
+      margin-top: 1rem;
+    }
+    .hero-text p {
+      font-size: 1rem;
+      color: var(--deep-cocoa);
+      margin-top: 1rem;
+      line-height: 1.5;
+    }
+    /* Footer */
+    .footer-lovebridge {
+      background-color: var(--soft-peach);
+      color: var(--deep-cocoa);
+    }
+    .footer-lovebridge a {
+      color: var(--deep-cocoa);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-lovebridge a:hover {
+      color: var(--warm-rose);
+    }
+    .chat-section img.rounded-circle {
+      object-fit: cover;
+    }
+    body.dark-mode .card,
+    body.dark-mode .chat-window {
+      background-color: var(--dropdown-bg);
+      color: var(--deep-cocoa);
+    }
+    body.dark-mode .list-group-item {
+      background-color: var(--dropdown-bg);
+      color: var(--deep-cocoa);
+    }
+
+
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-lovebridge">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img 
+          src="img/logo-nobg.png" 
+          alt="LoveBridge Logo" 
+          width="90" 
+          height="70" 
+          class="me-2"
+        >
+        <span>LoveBridge</span>
+      </a>
+      <button 
+        class="navbar-toggler" 
+        type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#navbarNav" 
+        aria-controls="navbarNav" 
+        aria-expanded="false" 
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto me-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Cómo Funciona</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Planes</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a 
+              class="nav-link dropdown-toggle" 
+              href="#" 
+              id="navbarDropdown" 
+              role="button" 
+              data-bs-toggle="dropdown" 
+              aria-expanded="false"
+            >
+              Comunidad
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Historias de Éxito</a></li>
+              <li><a class="dropdown-item" href="#">Eventos</a></li>
+              <li><a class="dropdown-item" href="#">Foros</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contacto</a>
+          </li>
+        </ul>
+        <div class="d-flex auth-buttons align-items-center">
+          <button type="button" class="btn btn-outline-dark me-2">Login</button>
+          <button type="button" class="btn btn-outline-dark me-2">Register</button>
+          <button type="button" class="btn btn-outline-dark me-2">Logout</button>
+          <button type="button" class="mode-toggle" id="modeToggle">Modo Oscuro</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+<!-- Chat Estático Mejorado y Uniforme -->
+<section class="chat-section py-5">
+  <div class="container">
+    <div class="row g-0" style="min-height: 500px;">
+      <div class="col-md-12">
+        <div class="card h-100" style="background-color: var(--cloud-white); color: var(--deep-cocoa);">
+          <div class="row h-100 g-0">
+            <!-- Lista de Chats -->
+            <div class="col-md-4 border-end" style="background-color: var(--dropdown-bg);">
+              <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item list-group-item-action active d-flex align-items-center" style="background-color: var(--soft-peach); color: var(--deep-cocoa);">
+                  <img src="img/avatar1.jpg" alt="Alex" class="rounded-circle me-3" width="40" height="40">
+                  <span>Alex 💬</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
+                  <img src="img/avatar2.jpg" alt="Emma" class="rounded-circle me-3" width="40" height="40">
+                  <span>Emma ❤️</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
+                  <img src="img/avatar3.jpg" alt="Carlos" class="rounded-circle me-3" width="40" height="40">
+                  <span>Carlos 🎮</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
+                  <img src="img/avatar4.jpg" alt="Sofía" class="rounded-circle me-3" width="40" height="40">
+                  <span>Sofía 🐱</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Ventana del Chat -->
+            <div class="col-md-8 d-flex flex-column">
+              <div class="card-header d-flex align-items-center" style="background-color: var(--soft-peach); color: var(--deep-cocoa);">
+                <img src="img/avatar1.jpg" alt="Alex" class="rounded-circle me-3" width="40" height="40">
+                <strong>Chat con Alex 💬</strong>
+              </div>
+              <div class="card-body chat-window overflow-auto flex-grow-1" style="background-color: var(--cloud-white); color: var(--deep-cocoa); max-height: 400px;">
+                <div class="d-flex align-items-start mb-3">
+                  <img src="img/yo.jpg" alt="Tú" class="rounded-circle me-2" width="40" height="40">
+                  <div>
+                    <strong>Tú:</strong><br>
+                    ¡Hola Alex! ¿Cómo estás?
+                  </div>
+                </div>
+                <div class="d-flex align-items-start mb-3">
+                  <img src="img/avatar1.jpg" alt="Alex" class="rounded-circle me-2" width="40" height="40">
+                  <div>
+                    <strong>Alex:</strong><br>
+                    ¡Hola! Bien, ¿y tú? 😊
+                  </div>
+                </div>
+                <div class="d-flex align-items-start mb-3">
+                  <img src="img/yo.jpg" alt="Tú" class="rounded-circle me-2" width="40" height="40">
+                  <div>
+                    <strong>Tú:</strong><br>
+                    Con ganas de verte... ❤️
+                  </div>
+                </div>
+                <div class="d-flex align-items-start">
+                  <img src="img/avatar1.jpg" alt="Alex" class="rounded-circle me-2" width="40" height="40">
+                  <div>
+                    <strong>Alex:</strong><br>
+                    Pronto, lo prometo. 💕
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> <!-- row inside card -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+  <!-- Footer -->
+  <footer class="footer-lovebridge py-4">
+    <div class="container">
+      <div class="row">
+        <!-- Información de la marca -->
+        <div class="col-md-4 mb-3">
+          <h5 class="text-uppercase">LoveBridge</h5>
+          <p>
+            Red social para parejas a distancia, conectando corazones y creando puentes de amor.
+          </p>
+        </div>
+        <!-- Enlaces rápidos -->
+        <div class="col-md-4 mb-3">
+          <h5 class="text-uppercase">Enlaces</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Cómo Funciona</a></li>
+            <li><a href="#">Planes</a></li>
+          </ul>
+        </div>
+        <!-- Contacto y políticas -->
+        <div class="col-md-4 mb-3">
+          <h5 class="text-uppercase">Contacto</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">Soporte</a></li>
+            <li><a href="#">Privacidad</a></li>
+            <li><a href="#">Términos</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="text-center">
+        &copy; 2025 LoveBridge. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle -->
+  <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  ></script>
+  <script>
+    // Alternar modo oscuro/claro
+    const modeToggle = document.getElementById('modeToggle');
+    modeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      modeToggle.textContent = document.body.classList.contains('dark-mode') ? 'Modo Claro' : 'Modo Oscuro';
+    });
+  </script>
+</body>
+</html>

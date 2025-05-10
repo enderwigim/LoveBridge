@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import styles from './Navbar.module.scss';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '../../../context/AuthContext';
+import { useAuth } from '../../../context/authContext';
 
 
 export default function NavBar() {
