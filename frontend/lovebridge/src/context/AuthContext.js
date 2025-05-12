@@ -11,6 +11,7 @@ export function AuthProvider({ children }) {
     setIsLoggedIn(!!token);
   }, []);
 
+  // Función utilizada para registrar el Token
   const login = (token) => {
     localStorage.setItem('token', token);
     setIsLoggedIn(true);
