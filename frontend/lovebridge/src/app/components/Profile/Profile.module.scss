@@ -40,6 +40,7 @@ $dark-deep-cocoa: #D3B8A0;
   background-size: cover;
   background-position: center;
   position: relative;
+  background-image: url('img/pareja-feliz.png');
 }
 
 /* Contenedor de perfil (debajo del banner) */
@@ -99,10 +100,13 @@ $dark-deep-cocoa: #D3B8A0;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   margin-top: 0.5rem;
-
+  display: none;
   .relation-name {
     font-weight: bold;
     color: $deep-cocoa;
+  }
+  &.active {
+    display: block;
   }
 }
 
