@@ -12,14 +12,14 @@ $dark-cloud-white: #2E2E2E;
 $dark-deep-cocoa: #D3B8A0;
 
 /* Perfil de Usuario estilo Facebook/Steam */
-.profile-section {
+.profile_section {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 150px);
 }
 
-.profile-card {
+.profile_card {
   width: 90%;
   max-width: 900px;
   border: none;
@@ -35,16 +35,16 @@ $dark-deep-cocoa: #D3B8A0;
 }
 
 /* Imagen de Fondo */
-.profile-banner {
+.profile_banner {
   height: 300px;
   background-size: cover;
   background-position: center;
   position: relative;
-  background-image: url('img/pareja-feliz.png');
+ 
 }
 
 /* Contenedor de perfil (debajo del banner) */
-.profile-info {
+.profile_info {
   padding: 20px;
   display: flex;
   align-items: center;
@@ -53,11 +53,11 @@ $dark-deep-cocoa: #D3B8A0;
 }
 
 /* Avatar de usuario */
-.profile-avatar-container {
+.profile_avatar_container {
   margin-left: 0;
 }
 
-.profile-avatar {
+.profile_avatar {
   width: 150px;
   height: 150px;
   object-fit: cover;
@@ -71,7 +71,7 @@ $dark-deep-cocoa: #D3B8A0;
 }
 
 /* Nombre del usuario */
-.profile-name {
+.profile_name {
   font-size: 2.5rem;
   font-weight: bold;
   color: $deep-cocoa;
@@ -79,7 +79,7 @@ $dark-deep-cocoa: #D3B8A0;
 }
 
 /* Botón de solicitar pareja */
-.btn-request {
+.btn_request {
   background-color: $warm-rose;
   color: #fff;
   border: none;
@@ -95,13 +95,13 @@ $dark-deep-cocoa: #D3B8A0;
 }
 
 /* Relación */
-.relation-section {
+.relation_section {
   background-color: $soft-peach;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   margin-top: 0.5rem;
   display: none;
-  .relation-name {
+  .relation_name {
     font-weight: bold;
     color: $deep-cocoa;
   }
@@ -111,7 +111,7 @@ $dark-deep-cocoa: #D3B8A0;
 }
 
 /* Biografía */
-.profile-bio {
+.profile_bio {
   font-size: 1.3rem;
   color: $deep-cocoa;
   text-align: center;
@@ -120,49 +120,49 @@ $dark-deep-cocoa: #D3B8A0;
 
 /* Responsividad */
 @media (min-width: 1600px) {
-  .profile-card {
+  .profile_card {
     max-width: 1100px;
   }
 }
 
 @media (max-width: 1200px) {
-  .profile-card {
+  .profile_card {
     width: 90%;
   }
 
-  .profile-banner {
+  .profile_banner {
     height: 250px;
   }
 
-  .profile-avatar {
+  .profile_avatar {
     width: 120px;
     height: 120px;
   }
 
-  .profile-name {
+  .profile_name {
     font-size: 2rem;
   }
 }
 
 @media (max-width: 768px) {
-  .profile-card {
+  .profile_card {
     width: 95%;
   }
 
-  .profile-banner {
+  .profile_banner {
     height: 200px;
   }
 
-  .profile-avatar {
+  .profile_avatar {
     width: 100px;
     height: 100px;
   }
 
-  .profile-name {
+  .profile_name {
     font-size: 1.75rem;
   }
 
-  .btn-request {
+  .btn_request {
     padding: 0.5rem 1rem;
     font-size: 1rem;
   }
