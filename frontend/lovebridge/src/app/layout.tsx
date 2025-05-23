@@ -5,6 +5,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import BootstrapClient from './components/BootstrapClient';
 import { AuthProvider } from '../context/AuthContext';
 import "./globals.scss";
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
