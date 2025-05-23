@@ -34,6 +34,8 @@ export default function Login() {
   };
 
   return (
+    <>
+    
     <form onSubmit={handleSubmit} className={styles.loginForm}>
       <div className="mb-3">
         <label htmlFor="email" className="form-label">Email</label>
@@ -65,6 +67,13 @@ export default function Login() {
         <div className="text-center mt-3">
             ¿No tienes cuenta? <Link href="/register">Regístrate</Link>
         </div>
+    {error && (
+      <div className="alert alert-danger mt-3" role="alert">
+        {error}
+      </div>
+    )}
     </form>
+    
+    </>
   );
 }
