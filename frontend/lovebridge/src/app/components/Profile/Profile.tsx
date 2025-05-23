@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import Image from 'next/image';
 // Es necesario importar el servicio.
 import { getProfileByUserName } from '../../../services/profileService';

@@ -1,16 +1,19 @@
-import Profile from "../components/Profile/Profile";    
+import Profile from "../components/Profile/Profile";   
+
+import { useEffect, useState } from "react"; 
+import { useRouter } from 'next/router';
+
 
 
 export default function ProfilePage() {
-    return (
-      <>
-        <div className="container my-5">
-            <h1 className="text-center">Registrarse</h1>
-            <p className="text-center">Bienvenido de nuevo a LoveBridge. Inicia sesión para continuar.</p>
-            <div className="d-flex justify-content-center">
-            <Profile/>
-            </div>
-        </div>
-      </>
-    )
-  }
+  const router = useRouter();
+  const { userName } = router.query;
+
+  if (typeof userName !== 'string') return <p>Cargando perfil...</p>;
+
+  return (
+    <>
+        <Profile userName={userName} />
+    </>
+  )
+}
