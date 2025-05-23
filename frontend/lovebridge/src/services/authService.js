@@ -14,10 +14,10 @@ export const loginService = async (email, password) => {
   }
 };
 
-export const registerService = async (name, email, password, password_confirmation) => {
+export const registerService = async (username, email, password, password_confirmation) => {
     try {
         const response = await axios.post(`${API_URL}/register`, {
-            name,
+            username,
             email,
             password,
             password_confirmation

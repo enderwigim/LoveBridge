@@ -47,14 +47,14 @@ class ProfileController extends Controller
     public function showByUserName($userName)
 {
     // Buscar el usuario por nombre
-    $user = User::where('name', $userName)->first();
+    $user = User::where('username', $userName)->first();
 
     if (!$user) {
         return response()->json(['message' => 'Usuario no encontrado'], 404);
     }
 
     // Cargar el perfil asociado al usuario
-    $profile = Profile::where('user_id', $user->id)->with('user:id,name,couple_id')->first();
+    $profile = Profile::where('user_id', $user->id)->with('user:id,username,couple_id')->first();
 
     if (!$profile) {
         return response()->json(['message' => 'Perfil no encontrado'], 404);
@@ -69,7 +69,7 @@ class ProfileController extends Controller
         'created_at' => $profile->created_at->toDateTimeString(),
         'updated_at' => $profile->updated_at->toDateTimeString(),
         'user' => [
-            'name' => $user->name,
+            'username' => $user->username,
             'couple_id' => $user->couple_id,
         ],
     ]);

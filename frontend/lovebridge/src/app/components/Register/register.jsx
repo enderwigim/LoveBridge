@@ -10,7 +10,7 @@ import { useAuth } from '../../../context/AuthContext';
 import { registerService } from '../../../services/authService';
 
 export default function Register() {
-  const [name, setName] = useState('');
+  const [username, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -26,8 +26,7 @@ export default function Register() {
       return;
     }
     try {
-          const data = await registerService(name, email, password, confirmPassword);
-          console.log("Token recibido:", data.token);
+          const data = await registerService(username, email, password, confirmPassword);
           // Guardamos el token en el localStorage en un contexto global.
           login(data.token);
           // Redigir al usuario a la pagina de inicio.
@@ -37,20 +36,20 @@ export default function Register() {
           setError(err); // Mostrar mensaje al usuario
         }
     
-    console.log('Datos de registro:', { name, email, password });
+    console.log('Datos de registro:', { username, email, password });
   };
 
   return (
     <form onSubmit={handleSubmit} className={styles.registerForm}>
       <div className="mb-3">
-        <label htmlFor="name" className="form-label">Nombre Completo</label>
+        <label htmlFor="name" className="form-label">Usuario</label>
         <input
           type="text"
-          id="name"
+          id="username"
           className="form-control"
-          placeholder="Tu nombre completo"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          placeholder="Usuario"
+          value={username}
+          onChange={(e) => setUserName(e.target.value)}
           required
         />
       </div>

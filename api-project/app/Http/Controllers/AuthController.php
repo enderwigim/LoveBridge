@@ -14,14 +14,14 @@ class AuthController extends Controller
     {
         // Valida los datos
         $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:users',
+            'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'role' => 'nullable|string|in:usuario,admin,psicologo',
         ]);
         // Crea un usuario en la base de datos, y le asigna el rol de usuario por defecto.
         $user = User::create([
-            'name' => $validated['name'],
+            'username' => $validated['username'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'role' => $validated['role'] ?? 'usuario', 
