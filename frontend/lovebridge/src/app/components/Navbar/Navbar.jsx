@@ -6,42 +6,24 @@ import { useState } from 'react';
 import styles from './Navbar.module.scss';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../../context/AuthContext';
+import SearchModal from '../SearchBar/searchBar';
 
 export default function NavBar() {
   const { isLoggedIn, logout } = useAuth();
-  const router = useRouter();
   const [showSearchModal, setShowSearchModal] = useState(false);
+  const router = useRouter();
+
 
   const handleLogout = () => {
     logout();
     router.push('/');
   };
 
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    // lógica de búsqueda
-    setShowSearchModal(false);
-  };
+
 
   return (
     <>
-      {/* Modal de búsqueda */}
-      {showSearchModal && (
-        <div className={styles.searchModalOverlay} onClick={() => setShowSearchModal(false)}>
-          <div className={styles.searchModal} onClick={(e) => e.stopPropagation()}>
-            <form onSubmit={handleSearchSubmit} className="d-flex w-100">
-              <input
-                type="text"
-                className="form-control me-2"
-                placeholder="Buscar un perfil..."
-              />
-              <button type="submit" className="btn btn_custom">
-                Buscar
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
+      {showSearchModal && <SearchModal onClose={() => setShowSearchModal(false)} />}
 
       <nav className={`navbar navbar-expand-lg ${styles.navbarLovebridge}`}>
         <div className="container-fluid">
@@ -62,7 +44,7 @@ export default function NavBar() {
               className="btn btn-link d-lg-none ms-auto"
               onClick={() => setShowSearchModal(true)}
               aria-label="Buscar perfil">
-              <i class="bi bi-search-heart"></i>
+              <i className="bi bi-search-heart"></i>
             </button>
           )}
 
@@ -130,11 +112,11 @@ export default function NavBar() {
               ) : (
                 <>
                   <button
-                    className="btn btn-link d-none d-lg-inline me-3"
+                    className="btn btn-link me-2 d-none d-lg-inline"
                     onClick={() => setShowSearchModal(true)}
                     aria-label="Buscar perfil"
                   >
-                    <i className="bi bi-search-heart"></i>
+                    <i className="bi bi-search-heart fs-4"></i>
                   </button>
                   <button type="button" className="btn btn-outline" onClick={handleLogout}>
                     Logout

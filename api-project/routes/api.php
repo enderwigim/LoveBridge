@@ -16,13 +16,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    // Ruta que devuelve el perfil del usuario autentificado según ID del perfil.
+    // PERFILES
     Route::get('/profiles/{profile}', [ProfileController::class, 'show']);
-    // Ruta que devuelve el perfil del usuario autentificado según nombre de usuario.
     Route::get('/profiles/username/{userName}', [ProfileController::class, 'showByUserName']);
     Route::apiResource('profiles', ProfileController::class);
-    
+    // USUARIOS
     Route::apiResource('users', UserController::class);
+        // Ruta para buscar usuarios por nombre de usuario.
+    Route::get('/users/search/{userName}', [UserController::class, 'showByUser']);
 });
 
 

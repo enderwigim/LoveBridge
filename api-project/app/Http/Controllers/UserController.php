@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -74,5 +75,27 @@ class UserController extends Controller
         $user->update(['role' => $request->role]);
         
         return response()->json(['message' => 'Rol actualizado']);
+    }
+    public function showByUser(Request $request, string $userName) {
+        $users = User::whereRaw('username ILIKE ?', ["%{$userName}%"])
+            ->with('profile:id,user_id,avatar')
+            ->limit(5)
+            ->get();
+        
+        if ($users->isEmpty()) {
+            return response()->json(['message' => 'No se encontraron usuarios'], 404);
+        }
+        return response()->json($users->map(function ($user) {
+            return [
+                'id' => $user->id,
+                'username' => $user->username,
+                'email' => $user->email,
+                'profile' => [
+                    'id' => $user->profile->id ?? null,
+                    'user_id' => $user->profile->user_id ?? null,
+                    'avatar' => $user->profile->avatar ?? null,
+                ]
+            ];
+        }));
     }
 }
