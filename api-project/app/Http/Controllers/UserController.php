@@ -98,4 +98,55 @@ class UserController extends Controller
             ];
         }));
     }
+
+    // CONTROL DE PAREJAS
+    public function addCouple(Request $request)
+    {
+        $request->validate([
+            'username' => 'required|exists:users,username',
+        ]);
+
+        $authUser = $request->user();
+        $partner = User::where('username', $request->username)->first();
+
+        // No permitir emparejarse con uno mismo
+        if ($authUser->id === $partner->id) {
+            return response()->json(['message' => 'No puedes ser tu propia pareja.'], 400);
+        }
+
+        // Ya tiene pareja
+        if ($authUser->couple_id !== null) {
+            return response()->json(['message' => 'Ya tienes pareja.'], 409);
+        }
+
+        if ($partner->couple_id !== null) {
+            return response()->json(['message' => 'La persona ya tiene pareja.'], 409);
+        }
+
+        // Crear relación de pareja mutua
+        $authUser->update(['couple_id' => $partner->id]);
+        $partner->update(['couple_id' => $authUser->id]);
+
+        return response()->json(['message' => '¡Ahora son pareja! 🎉']);
+    }
+    public function removeCouple(Request $request)
+    {
+        $authUser = $request->user();
+
+        if (!$authUser->couple_id) {
+            return response()->json(['message' => 'No tienes pareja actualmente.'], 400);
+        }
+
+        $partner = User::find($authUser->couple_id);
+
+        // Desvincular a ambos
+        $authUser->update(['couple_id' => null]);
+
+        if ($partner && $partner->couple_id === $authUser->id) {
+            $partner->update(['couple_id' => null]);
+        }
+
+        return response()->json(['message' => 'Relación de pareja eliminada.']);
+    }
+
 }
