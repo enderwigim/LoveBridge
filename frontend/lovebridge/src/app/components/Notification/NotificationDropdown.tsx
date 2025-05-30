@@ -1,31 +1,53 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './NotificationDropdown.module.scss';
-
+import { fetchNotifications, Notification } from '../../../services/notificationService';
 
 interface NotificationDropdownProps {
   onClose: () => void;
 }
 
 export default function NotificationDropdown({ onClose }: NotificationDropdownProps) {
-    const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        function handleClickOutside(event: MouseEvent) {
-        if (
-            dropdownRef.current &&
-            !dropdownRef.current.contains(event.target as Node)
-        ) {
-            onClose();
-        }
-        }
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    }
 
-        document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [onClose]);
 
-        return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [onClose]);
+  useEffect(() => {
+    const token = localStorage.getItem('token'); // Asegúrate de que esté guardado correctamente
+    if (!token) {
+      setError('Token no encontrado');
+      setLoading(false);
+      return;
+    }
+
+    fetchNotifications(token)
+      .then((data) => {
+        setNotifications(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError('Error al cargar notificaciones');
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <div
       ref={dropdownRef}
@@ -36,15 +58,27 @@ export default function NotificationDropdown({ onClose }: NotificationDropdownPr
         <h6 className="fw-bold mb-0">Notificaciones</h6>
         <button className="btn-close" onClick={onClose} aria-label="Cerrar"></button>
       </div>
+
       <ul className="list-unstyled mb-0">
-        <li className={`d-flex align-items-center gap-2 ${styles.notificationItem}`}>
-          <i className={`bi bi-heart-fill ${styles.notificationIcon}`}></i>
-          Tienes una nueva solicitud de pareja
-        </li>
-        <li className={`d-flex align-items-center gap-2 ${styles.notificationItem}`}>
-          <i className={`bi bi-chat-heart ${styles.notificationIcon}`}></i>
-          Has recibido un nuevo mensaje
-        </li>
+        {loading && <li>Cargando...</li>}
+        {error && <li>{error}</li>}
+        {!loading && !error && notifications.length === 0 && (
+          <li>No tienes notificaciones</li>
+        )}
+        {notifications.map((n) => (
+          <li key={n.id} className={`d-flex align-items-center gap-2 ${styles.notificationItem}`}>
+            <i
+              className={`bi ${
+                n.type === 'message'
+                  ? 'bi-chat-heart'
+                  : n.type === 'couple_request'
+                  ? 'bi-heart-fill'
+                  : 'bi-bell'
+              } ${styles.notificationIcon}`}
+            ></i>
+            {n.data.message}
+          </li>
+        ))}
       </ul>
     </div>
   );
