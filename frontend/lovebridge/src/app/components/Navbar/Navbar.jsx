@@ -7,10 +7,14 @@ import styles from './Navbar.module.scss';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../../context/AuthContext';
 import SearchModal from '../SearchBar/searchBar';
+import NotificationDropdown from '../Notification/NotificationDropdown';
+
 
 export default function NavBar() {
   const { isLoggedIn, logout } = useAuth();
   const [showSearchModal, setShowSearchModal] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
+
   const router = useRouter();
 
 
@@ -24,6 +28,7 @@ export default function NavBar() {
   return (
     <>
       {showSearchModal && <SearchModal onClose={() => setShowSearchModal(false)} />}
+      {showNotifications && <NotificationDropdown onClose={() => setShowNotifications(false)} />}
 
       <nav className={`navbar navbar-expand-lg ${styles.navbarLovebridge}`}>
         <div className="container-fluid">
@@ -38,14 +43,26 @@ export default function NavBar() {
             <span>LoveBridge</span>
           </Link>
 
-          {/* Botón de lupa */}
+          {/* Botón de lupa y notificaciones */}
           {isLoggedIn && (
+            <>
+            <div className="d-flex align-items-center ms-auto d-lg-none">
             <button
-              className="btn btn-link d-lg-none ms-auto"
+              className="btn btn-link"
               onClick={() => setShowSearchModal(true)}
               aria-label="Buscar perfil">
               <i className="bi bi-search-heart"></i>
             </button>
+            
+
+            <button
+              className="btn btn-link"
+              onClick={() => setShowNotifications((prev) => !prev)}
+              aria-label="Ver notificaciones">
+              <i className="bi bi-bell fs-4"></i>
+            </button>
+            </div>
+            </>
           )}
 
           <button
@@ -59,7 +76,6 @@ export default function NavBar() {
           >
             <span className={`navbar-toggler-icon ${styles.navbarTogglerIcon}`}></span>
           </button>
-
           <div className={`collapse navbar-collapse ${styles.navbarCollapse}`} id="navbarNav">
             <ul className="navbar-nav ms-auto me-3">
               <li className="nav-item">
@@ -111,13 +127,20 @@ export default function NavBar() {
                 </>
               ) : (
                 <>
-                  <button
-                    className="btn btn-link me-2 d-none d-lg-inline"
-                    onClick={() => setShowSearchModal(true)}
-                    aria-label="Buscar perfil"
-                  >
-                    <i className="bi bi-search-heart fs-4"></i>
-                  </button>
+                  <div className="me-2 d-none d-lg-inline">
+                    <button
+                      className="btn btn-link"
+                      onClick={() => setShowSearchModal(true)}
+                      aria-label="Buscar perfil">
+                      <i className="bi bi-search-heart fs-4"></i>
+                    </button>
+                    <button
+                      className="btn btn-link"
+                      onClick={() => setShowNotifications((prev) => !prev)}
+                      aria-label="Ver notificaciones">
+                      <i className="bi bi-bell fs-4"></i>
+                    </button>
+                  </div>
                   <button type="button" className="btn btn-outline" onClick={handleLogout}>
                     Logout
                   </button>
