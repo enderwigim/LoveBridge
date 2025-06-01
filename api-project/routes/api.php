@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ChatMessageController;
+
 
 // Rutas públicas
 Route::post('/register', [AuthController::class, 'register']);

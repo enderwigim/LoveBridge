@@ -16,7 +16,7 @@ export default function SearchModal({ onClose }: Props) {
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem('token'); // ⬅️ aquí lo recuperamos
+    const token = localStorage.getItem('token');
 
     const fetchResults = async () => {
       if (!token || query.length < 2) return;

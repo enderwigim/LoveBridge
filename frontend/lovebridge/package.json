@@ -10,17 +10,17 @@
   },
   "dependencies": {
     "axios": "^1.9.0",
-    "bootstrap": "^5.3.3",
+    "bootstrap": "^5.3.6",
     "bootstrap-icons": "^1.13.1",
     "next": "15.2.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "sass": "^1.86.0"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "sass": "^1.89.1",
     "typescript": "^5"
   }
 }

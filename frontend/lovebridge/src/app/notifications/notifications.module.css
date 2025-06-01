@@ -1,0 +1,7 @@
+.cardHeader {
+  background-color: var(--soft-peach);
+  color: var(--deep-cocoa);
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+}/*# sourceMappingURL=notifications.module.css.map */

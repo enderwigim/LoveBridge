@@ -4,6 +4,8 @@ import styles from './Profile.module.scss';
 import Image from 'next/image';
 // Es necesario importar el servicio.
 import { getProfileByUserName } from '../../../services/profileService';
+import { sendCoupleRequest } from '../../../services/sendCoupleRequest';
+
 
 type ProfileProps  = {
     userName : string;
@@ -37,6 +39,7 @@ export default function Profile({ userName }: ProfileProps) {
         fetchProfile();
     }, [userName]);
 
+
     if (error) {
         return <p className="text-danger">Error: {error}</p>;
     }
@@ -47,6 +50,22 @@ export default function Profile({ userName }: ProfileProps) {
     const bannerImage = profile.background_img
         ? `/img/defaultBackground/${profile.background_img}`
         : '/img/defaultBackground/default.jpg';
+
+    // Función para enviar solicitud de pareja
+    const handleRequest = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        setError('No has iniciado sesión.');
+        return;
+    }
+
+    try {
+        const res = await sendCoupleRequest(userName, token);
+        alert(res.message || 'Solicitud enviada con éxito');
+    } catch (err: any) {
+        alert(err.message || 'Error al enviar solicitud');
+    }
+};
     return (
         <>
             {/* Perfil de Usuario Estilo Facebook/Steam */}
@@ -78,7 +97,7 @@ export default function Profile({ userName }: ProfileProps) {
                                         <span className={`${styles.relation_section}`}>{profile.user.couple_id} 💕</span>
                                     </div>
                                 ) : (
-                                    <button className={`${styles.btn_request} btn mt-2`} id="requestButton">Solicitar Pareja</button>
+                                    <button className={`${styles.btn_request} btn mt-2`} id="requestButton" onClick={handleRequest}>Solicitar Pareja</button>
                                 )}
                             </div>
                         </div>

@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './NotificationDropdown.module.scss';
 import { fetchNotifications, Notification } from '../../../services/notificationService';
+import NotificationItem from '../NotificationItem/NotificationItem';
 
 interface NotificationDropdownProps {
   onClose: () => void;
@@ -65,19 +66,12 @@ export default function NotificationDropdown({ onClose }: NotificationDropdownPr
         {!loading && !error && notifications.length === 0 && (
           <li>No tienes notificaciones</li>
         )}
-        {notifications.map((n) => (
-          <li key={n.id} className={`d-flex align-items-center gap-2 ${styles.notificationItem}`}>
-            <i
-              className={`bi ${
-                n.type === 'message'
-                  ? 'bi-chat-heart'
-                  : n.type === 'couple_request'
-                  ? 'bi-heart-fill'
-                  : 'bi-bell'
-              } ${styles.notificationIcon}`}
-            ></i>
-            {n.data.message}
-          </li>
+         {notifications.map((n) => (
+          <NotificationItem
+            key={n.id}
+            notification={n}
+            onClick={() => window.location.href = '/notifications'}
+          />
         ))}
       </ul>
     </div>

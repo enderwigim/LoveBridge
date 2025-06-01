@@ -9,9 +9,25 @@ class NotificationController extends Controller
 {
     // Obtener todas las notificaciones del usuario autenticado
     public function index(Request $request)
-    {
-        return $request->user()->notifications()->latest()->get();
-    }
+{
+    $notifications = $request->user()
+        ->notifications()
+        ->latest()
+        ->get()
+        ->map(function ($notification) {
+            return [
+                'id' => $notification->id,
+                'type' => $notification->type,
+                'data' => $notification->data,
+                'read' => $notification->read,
+                'created_at' => $notification->created_at,
+                'from_username' => $notification->data['from_username'] ?? null,
+                'from_user_id' => $notification->data['from_user_id'] ?? null,
+            ];
+        });
+
+    return response()->json($notifications);
+}
 
     // Marcar una notificación como leída
     public function markAsRead($id, Request $request)

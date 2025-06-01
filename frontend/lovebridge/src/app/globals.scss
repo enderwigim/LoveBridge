@@ -16,8 +16,8 @@ $primary: $warm-rose;
 $body-bg: $cloud-white;
 $font-family-base: 'Poppins', sans-serif;
 
-// 3. Importa Bootstrap (opcional: importa solo lo necesario)
-@import "~bootstrap/scss/bootstrap";
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
 
 
 

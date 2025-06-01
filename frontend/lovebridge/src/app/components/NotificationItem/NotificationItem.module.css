@@ -1,0 +1,53 @@
+/* Variables de colores del :root ya definidos en globals.scss */
+.notificationItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #eee;
+  background-color: var(--cloud-white);
+}
+.notificationItem:hover {
+  background-color: var(--soft-peach);
+}
+
+.notificationIcon {
+  font-size: 1.25rem;
+  color: var(--warm-rose);
+  margin-right: 0.5rem;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.acceptButton {
+  background-color: var(--warm-rose);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+.acceptButton:hover {
+  background-color: #e05a5b;
+}
+
+.rejectButton {
+  background-color: var(--deep-cocoa);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+.rejectButton:hover {
+  background-color: #3c332e;
+}/*# sourceMappingURL=NotificationItem.module.css.map */
