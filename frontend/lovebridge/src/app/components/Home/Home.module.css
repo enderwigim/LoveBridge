@@ -1,0 +1,34 @@
+.main {
+  flex: 1;
+  padding: 3rem 0;
+}
+.main .heroText {
+  opacity: 0;
+  animation: slideInLeft 1s ease forwards;
+  color: var(--deep-cocoa);
+}
+.main .heroText h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+.main .heroText h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+.main .heroText p {
+  font-size: 1rem;
+  margin-top: 1rem;
+  line-height: 1.5;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}/*# sourceMappingURL=Home.module.css.map */

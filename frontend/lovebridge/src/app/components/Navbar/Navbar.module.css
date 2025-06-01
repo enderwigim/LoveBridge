@@ -1,0 +1,49 @@
+.navbarLovebridge {
+  background-color: var(--soft-peach) !important;
+  border-radius: 10px 10px 0px 0px;
+}
+.navbarLovebridge .navbarBrand {
+  color: var(--deep-cocoa) !important;
+  font-weight: 700;
+}
+.navbarLovebridge .navLink {
+  color: var(--deep-cocoa) !important;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+.navbarLovebridge .navLink:hover, .navbarLovebridge .navLink:focus {
+  color: var(--warm-rose) !important;
+}
+.navbarLovebridge .navbarToggler {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+.navbarLovebridge .navbarToggler:focus, .navbarLovebridge .navbarToggler:active {
+  outline: none;
+  box-shadow: none;
+}
+.navbarLovebridge .dropdownMenu {
+  background-color: var(--cloud-white) !important;
+  border: 1px solid var(--soft-peach) !important;
+}
+.navbarLovebridge .dropdownItem {
+  color: var(--deep-cocoa) !important;
+  transition: background-color 0.3s, color 0.3s;
+}
+.navbarLovebridge .dropdownItem:hover, .navbarLovebridge .dropdownItem:focus {
+  background-color: var(--warm-rose) !important;
+  color: white !important;
+}
+
+.authButtons .btn {
+  border-color: var(--deep-cocoa);
+  color: var(--deep-cocoa);
+  background-color: transparent;
+  transition: all 0.3s;
+}
+.authButtons .btn:hover {
+  background-color: var(--warm-rose);
+  color: white;
+  border-color: var(--warm-rose);
+}/*# sourceMappingURL=Navbar.module.css.map */

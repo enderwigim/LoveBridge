@@ -16,7 +16,8 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    // config/database.php
+    'default' => env('DB_CONNECTION', 'pgsql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -97,6 +98,17 @@ return [
             'sslmode' => 'prefer',
         ],
 
+        'mongodb' => [
+        'driver'   => 'mongodb',
+        'host'     => env('DB_MONGODB_HOST', '127.0.0.1'),
+        'port'     => env('DB_MONGODB_PORT', 27017),
+        'database' => env('DB_MONGODB_DATABASE', 'Lovebridge'),
+        'username' => env('DB_MONGODB_USERNAME', ''),
+        'password' => env('DB_MONGODB_PASSWORD', ''),
+        'options'  => [
+            'authSource' => env('DB_MONGODB_AUTH_SOURCE', 'admin'),
+        ],
+        ],
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DB_URL'),

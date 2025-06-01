@@ -1,0 +1,42 @@
+.notificationsDropdown {
+  width: 280px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.notificationItem {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  cursor: pointer;
+  color: var(--deep-cocoa);
+}
+.notificationItem:hover {
+  background-color: var(--soft-peach);
+}
+.notificationItem:hover .notificationIcon {
+  color: var(--warm-rose);
+}
+.notificationItem:active {
+  transform: scale(0.98);
+  background-color: var(--warm-rose);
+  color: white;
+}
+.notificationItem:active .notificationIcon {
+  color: white;
+}
+
+.notificationIcon {
+  font-size: 1.25rem;
+  color: var(--deep-cocoa);
+  transition: color 0.2s ease;
+}/*# sourceMappingURL=NotificationDropdown.module.css.map */
