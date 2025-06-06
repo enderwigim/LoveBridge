@@ -43,6 +43,7 @@ export default function NotificationsPage() {
           )}
 {notifications.map((n) => (
     <NotificationItem
+      token={localStorage.getItem('token') || ''}
       key={n.id}
       notification={n}
       showActions={true}

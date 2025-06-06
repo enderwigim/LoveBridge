@@ -30,11 +30,22 @@ Route::middleware('auth:sanctum')->group(function () {
     // NOTIFICACIONES
     Route::get('/notifications', [NotificationController::class, 'index']);
     Route::post('/notifications/{id}/read', [NotificationController::class, 'markAsRead']);
+    Route::post('/notifications/{id}/accept', [NotificationController::class, 'acceptCoupleRequest']);
+    Route::delete('/notifications/{id}/reject', [NotificationController::class, 'rejectCoupleRequest']);
     // SOLICITUDES DE PAREJA
-    Route::middleware('auth:sanctum')->post('/coupleRequest/{username}', [NotificationController::class, 'sendCoupleRequest']);
+   // SOLICITUDES DE PAREJA
+    Route::post('/coupleRequest/{username}', [NotificationController::class, 'sendCoupleRequest']);
+
     // PAREJAS
     Route::post('/couple/add', [UserController::class, 'addCouple']);
     Route::post('/couple/remove', [UserController::class, 'removeCouple']);
+    // CHAT
+    Route::prefix('chat')->group(function () {
+    Route::get('/', [ChatMessageController::class, 'index']); // todos los mensajes
+    Route::post('/', [ChatMessageController::class, 'store']); // guardar mensaje
+    Route::get('/conversation/{user1}/{user2}', [ChatMessageController::class, 'conversation']); // conversación entre 2 usuarios
+    Route::patch('/read/{id}', [ChatMessageController::class, 'markAsRead']); // marcar como leído
+});
 });
 
 

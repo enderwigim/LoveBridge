@@ -83,4 +83,51 @@ public function sendCoupleRequest(string $username, Request $request)
     return response()->json(['message' => 'Solicitud enviada con éxito.']);
 }
 
+public function acceptCoupleRequest($notificationId, Request $request)
+{
+    $notification = Notification::where('id', $notificationId)
+        ->where('user_id', $request->user()->id)
+        ->where('type', 'couple_request')
+        ->firstOrFail();
+
+    $receiver = $request->user();
+    $senderId = $notification->data['from_user_id'] ?? null;
+
+    if (!$senderId) {
+        return response()->json(['message' => 'Datos de notificación inválidos'], 400);
+    }
+
+    $sender = User::find($senderId);
+
+    if (!$sender) {
+        return response()->json(['message' => 'El usuario que envió la solicitud no existe'], 404);
+    }
+
+    // Verificar si alguno ya tiene pareja
+    if ($receiver->couple_id || $sender->couple_id) {
+        return response()->json(['message' => 'Uno de los usuarios ya tiene pareja'], 409);
+    }
+
+    // Emparejar
+    $receiver->update(['couple_id' => $sender->id]);
+    $sender->update(['couple_id' => $receiver->id]);
+
+    // Eliminar notificación
+    $notification->delete();
+
+    return response()->json(['message' => '¡Ahora son pareja! 🎉']);
+}
+public function rejectCoupleRequest($notificationId, Request $request)
+{
+    $notification = Notification::where('id', $notificationId)
+        ->where('user_id', $request->user()->id)
+        ->where('type', 'couple_request')
+        ->firstOrFail();
+
+    $notification->delete();
+
+    return response()->json(['message' => 'Solicitud rechazada']);
+}
+
+
 }

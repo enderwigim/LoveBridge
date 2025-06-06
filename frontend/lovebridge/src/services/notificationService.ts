@@ -25,10 +25,43 @@ const authHeader = (token: string) => ({
 export const fetchNotifications = async (
   token: string
 ): Promise<Notification[]> => {
+  
   try {
     const response = await axios.get(`${API_URL}/notifications`, authHeader(token));
     return response.data;
   } catch (error: any) {
     throw error.response?.data?.message || 'Error al obtener notificaciones';
+  }
+};
+
+export const acceptCoupleRequest = async (
+  notificationId: number,
+  token: string
+): Promise<string> => {
+  
+  try {
+    const response = await axios.post(
+      `${API_URL}/notifications/${notificationId}/accept`,
+      {},
+      authHeader(token)
+    );
+    return response.data.message;
+  } catch (error: any) {
+    throw error.response?.data?.message || 'Error al aceptar solicitud';
+  }
+};
+
+export const rejectCoupleRequest = async (
+  notificationId: number,
+  token: string
+): Promise<string> => {
+  try {
+    const response = await axios.delete(
+      `${API_URL}/notifications/${notificationId}/reject`,
+      authHeader(token)
+    );
+    return response.data.message;
+  } catch (error: any) {
+    throw error.response?.data?.message || 'Error al rechazar solicitud';
   }
 };
