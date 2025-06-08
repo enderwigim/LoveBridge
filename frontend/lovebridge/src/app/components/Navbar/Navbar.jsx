@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import styles from './Navbar.module.scss';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '../../../context/AuthContext';
+import { useAuth } from '@/context/AuthContext'; 
 import SearchModal from '../SearchBar/searchBar';
 import NotificationDropdown from '../Notification/NotificationDropdown';
 
