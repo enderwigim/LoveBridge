@@ -4,31 +4,32 @@ import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import ChatInterface from '../../components/ChatInterface/ChatInterface';
 import { searchUsersByUsername, User } from '../../../services/searchUsersByUsername';
-import { useAuth } from '@/context/AuthContext'; // asegúrate de tener este contexto
+import { useAuth } from '@/context/AuthContext';
 
 export default function ChatPage() {
   const { username } = useParams();
-  const { user, token } = useAuth();
-
+  const token = localStorage.getItem('token'); 
+  const user = localStorage.getItem('user');
+  const [userData, setUserData] = useState<User | null>(user ? JSON.parse(user) : null);
   const [couple, setCouple] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
   const loadUser = async () => {
-    if (!token || !username) {
-      console.warn('Token o username no definidos', { token, username });
+    if (!token || !username || !userData?.username) {
       return;
     }
 
     try {
-      console.log('Buscando usuario', username);
       const foundUsers = await searchUsersByUsername(username.toString(), token);
-      console.log('Usuarios encontrados:', foundUsers);
+      const foundMainUser = await searchUsersByUsername(userData.username, token);
+
       if (!foundUsers.length) {
         setError(`No se encontró el usuario "${username}"`);
       } else {
         setCouple(foundUsers[0]);
+        setUserData(foundMainUser[0]); // Actualiza userData desde API si necesario
       }
     } catch (err: any) {
       console.error('Error al buscar usuario:', err);
@@ -39,7 +40,7 @@ export default function ChatPage() {
   };
 
   loadUser();
-}, [username, token]);
+}, [username, token, userData?.username]);
 
   if (!token) return <p className="text-center mt-5 text-danger">No estás autenticado</p>;
   if (loading) return <p className="text-center mt-5">Cargando...</p>;
@@ -61,7 +62,7 @@ export default function ChatPage() {
 
   return (
     <ChatInterface
-      user={toChatUser(user)}
+      user={toChatUser(userData)}
       couple={toChatUser(couple)}
       token={token}
     />

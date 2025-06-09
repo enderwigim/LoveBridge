@@ -8,17 +8,21 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
+    
     setIsLoggedIn(!!token);
   }, []);
 
   // Función utilizada para registrar el Token
-  const login = (token) => {
+  const login = (token, user) => {
     localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
     setIsLoggedIn(true);
   };
 
   const logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setIsLoggedIn(false);
   };
 

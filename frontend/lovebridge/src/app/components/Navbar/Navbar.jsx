@@ -17,13 +17,10 @@ export default function NavBar() {
 
   const router = useRouter();
 
-
   const handleLogout = () => {
     logout();
     router.push('/');
   };
-
-
 
   return (
     <>

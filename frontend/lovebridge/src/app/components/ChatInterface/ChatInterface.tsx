@@ -25,13 +25,18 @@ interface Props {
 const fallbackUser: ChatUser = {
   id: 1,
   username: 'Tú',
-  profile: { avatar: '/img/default.jpg' },
+  profile: { avatar: 'default_avatar.jpg' },
 };
 
 const fallbackCouple: ChatUser = {
   id: 2,
   username: 'Alex',
-  profile: { avatar: '/img/default.jpg' },
+  profile: { avatar: 'default_avatar.jpg' },
+};
+
+// Función para obtener la ruta segura del avatar
+const getAvatarPath = (avatar?: string | null): string => {
+  return avatar ? `/img/defaultProfiles/${avatar}` : '/img/defaultProfiles/default_avatar.jpg';
 };
 
 export default function ChatInterface({ user = fallbackUser, couple = fallbackCouple, token }: Props) {
@@ -84,11 +89,19 @@ export default function ChatInterface({ user = fallbackUser, couple = fallbackCo
           <div className="col-md-12">
             <div className="card h-100" style={{ backgroundColor: 'var(--cloud-white)', color: 'var(--deep-cocoa)' }}>
               <div className="d-flex flex-column h-100">
+                {/* Cabecera del chat */}
                 <div className="card-header d-flex align-items-center" style={{ backgroundColor: 'var(--soft-peach)', color: 'var(--deep-cocoa)' }}>
-                  <Image src={couple.profile?.avatar || '/img/default.jpg'} alt={couple.username} className="rounded-circle me-3" width={40} height={40} />
+                  <Image
+                    src={getAvatarPath(couple.profile?.avatar)}
+                    alt={couple.username}
+                    className="rounded-circle me-3"
+                    width={40}
+                    height={40}
+                  />
                   <strong>Chat con {couple.username}</strong>
                 </div>
 
+                {/* Mensajes */}
                 <div ref={chatRef} className="card-body chat-window overflow-auto flex-grow-1" style={{ backgroundColor: 'var(--cloud-white)', color: 'var(--deep-cocoa)', maxHeight: '400px' }}>
                   {messages.length === 0 ? (
                     <p className="text-center">No hay mensajes aún</p>
@@ -103,10 +116,11 @@ export default function ChatInterface({ user = fallbackUser, couple = fallbackCo
                         day: '2-digit',
                         month: '2-digit',
                       });
+
                       return (
                         <div className="d-flex align-items-start mb-3" key={i}>
                           <Image
-                            src={avatar || '/img/default.jpg'}
+                            src={getAvatarPath(avatar)}
                             alt={isMe ? 'Tú' : couple.username}
                             className="rounded-circle me-2"
                             width={40}
@@ -124,6 +138,7 @@ export default function ChatInterface({ user = fallbackUser, couple = fallbackCo
                   )}
                 </div>
 
+                {/* Input para escribir mensaje */}
                 <div className="card-footer p-3 border-top">
                   <div className="input-group">
                     <input
@@ -149,4 +164,3 @@ export default function ChatInterface({ user = fallbackUser, couple = fallbackCo
     </section>
   );
 }
-

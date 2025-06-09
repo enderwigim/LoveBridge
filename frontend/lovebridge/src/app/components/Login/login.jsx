@@ -24,7 +24,7 @@ export default function Login() {
       const data = await loginService(email, password);
       console.log("Token recibido:", data.token);
       // Guardamos el token en el localStorage en un contexto global.
-      login(data.token);
+      login(data.token, data.user);
       // Redigir al usuario a la pagina de inicio.
       router.push('/');
     } catch (err) {
