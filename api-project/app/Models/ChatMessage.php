@@ -24,14 +24,23 @@ class ChatMessage extends Model
 
     public $timestamps = false;
 
+    // public function sender()
+    // {
+    //     return $this->belongsTo(\App\Models\User::class, 'sender_id');
+    // }
+
+    // public function receiver()
+    // {
+    //     return $this->belongsTo(\App\Models\User::class, 'receiver_id');
+    // }
     public function sender()
     {
-        return $this->belongsTo(\App\Models\User::class, 'sender_id');
+        return $this->belongsTo(User::class, 'sender_id', '_id'); // MongoDB usa _id por defecto
     }
 
     public function receiver()
     {
-        return $this->belongsTo(\App\Models\User::class, 'receiver_id');
+        return $this->belongsTo(User::class, 'receiver_id', '_id');
     }
 }
 

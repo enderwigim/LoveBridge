@@ -40,12 +40,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/couple/add', [UserController::class, 'addCouple']);
     Route::post('/couple/remove', [UserController::class, 'removeCouple']);
     // CHAT
-    Route::prefix('chat')->group(function () {
-    Route::get('/', [ChatMessageController::class, 'index']); // todos los mensajes
-    Route::post('/', [ChatMessageController::class, 'store']); // guardar mensaje
-    Route::get('/conversation/{user1}/{user2}', [ChatMessageController::class, 'conversation']); // conversación entre 2 usuarios
-    Route::patch('/read/{id}', [ChatMessageController::class, 'markAsRead']); // marcar como leído
-});
+    //Route::prefix('chat')->group(function () {
+        Route::get('/chat', [ChatMessageController::class, 'index']); // todos los mensajes
+        Route::post('/chat', [ChatMessageController::class, 'store']); // guardar mensaje
+        Route::get('/chat/conversation/{user1}/{user2}', [ChatMessageController::class, 'conversation']); // conversación entre 2 usuarios
+        Route::patch('/read/{id}', [ChatMessageController::class, 'markAsRead']); // marcar como leído
+    //});
 });
 
 

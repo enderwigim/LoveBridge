@@ -1,4 +1,3 @@
-// components/ChatInterface.tsx
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
@@ -34,7 +33,6 @@ const fallbackCouple: ChatUser = {
   profile: { avatar: 'default_avatar.jpg' },
 };
 
-// Función para obtener la ruta segura del avatar
 const getAvatarPath = (avatar?: string | null): string => {
   return avatar ? `/img/defaultProfiles/${avatar}` : '/img/defaultProfiles/default_avatar.jpg';
 };
@@ -102,7 +100,7 @@ export default function ChatInterface({ user = fallbackUser, couple = fallbackCo
                 </div>
 
                 {/* Mensajes */}
-                <div ref={chatRef} className="card-body chat-window overflow-auto flex-grow-1" style={{ backgroundColor: 'var(--cloud-white)', color: 'var(--deep-cocoa)', maxHeight: '400px' }}>
+                <div ref={chatRef} className="card-body chat-window overflow-auto flex-grow-1" style={{ maxHeight: '400px' }}>
                   {messages.length === 0 ? (
                     <p className="text-center">No hay mensajes aún</p>
                   ) : (
@@ -118,19 +116,17 @@ export default function ChatInterface({ user = fallbackUser, couple = fallbackCo
                       });
 
                       return (
-                        <div className="d-flex align-items-start mb-3" key={i}>
+                        <div className={`${styles.messageContainer} ${isMe ? styles.me : ''}`} key={i}>
                           <Image
                             src={getAvatarPath(avatar)}
                             alt={isMe ? 'Tú' : couple.username}
-                            className="rounded-circle me-2"
+                            className="rounded-circle"
                             width={40}
                             height={40}
                           />
-                          <div>
-                            <strong>{isMe ? 'Tú' : couple.username}:</strong>
-                            <br />
-                            {msg.content}
-                            <div className="text-muted small">{formattedTime}</div>
+                          <div className={`${styles.messageBubble} ${isMe ? styles.me : ''}`}>
+                            <div>{msg.content}</div>
+                            <div className={styles.messageMeta}>{formattedTime}</div>
                           </div>
                         </div>
                       );
@@ -150,9 +146,14 @@ export default function ChatInterface({ user = fallbackUser, couple = fallbackCo
                       onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
                       disabled={loading}
                     />
-                    <button className="btn btn-outline-dark" type="button" onClick={sendMessage} disabled={loading}>
+                    <button
+                      type="button"
+                      onClick={sendMessage}
+                      disabled={loading}
+                      className={`btn ${styles.customAuthButton}`}>
                       Enviar
                     </button>
+
                   </div>
                 </div>
 

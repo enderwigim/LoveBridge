@@ -23,6 +23,7 @@ export const getConversation = async (
       Accept: 'application/json',
     },
   });
+  console.log('Mensajes recibidos:', response.data);
   return response.data;
 };
 

@@ -46,14 +46,17 @@ class ChatMessageController extends Controller
 
     // Mostrar mensajes entre dos usuarios
     public function conversation($user1, $user2)
-    {
-        $messages = ChatMessage::where(function ($q) use ($user1, $user2) {
-            $q->where('sender_id', $user1)->where('receiver_id', $user2);
-        })->orWhere(function ($q) use ($user1, $user2) {
-            $q->where('sender_id', $user2)->where('receiver_id', $user1);
-        })->orderBy('sent_at', 'asc')->get();
+{
+    $user1 = (int) $user1;
+    $user2 = (int) $user2;
 
-        return response()->json($messages);
-    }
+    $messages = ChatMessage::where(function ($q) use ($user1, $user2) {
+        $q->where('sender_id', $user1)->where('receiver_id', $user2);
+    })->orWhere(function ($q) use ($user1, $user2) {
+        $q->where('sender_id', $user2)->where('receiver_id', $user1);
+    })->orderBy('sent_at', 'asc')->get();
+
+    return response()->json($messages);
+}
 
 }
