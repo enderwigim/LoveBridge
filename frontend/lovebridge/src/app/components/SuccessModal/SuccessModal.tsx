@@ -1,24 +1,36 @@
 'use client';
+
 import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './SuccessModal.module.scss';
 
 type Props = {
   partnerName: string;
-  onClose: () => void;
 };
 
-export default function SuccessModal({ partnerName, onClose }: Props) {
+export default function SuccessModal({ partnerName }: Props) {
+  const router = useRouter();
+
+  // Redirige a los 3 segundos solo si partnerName está presente
   useEffect(() => {
-    const timeout = setTimeout(onClose, 3000); // se cierra solo tras 3s
+    if (!partnerName) return;
+    const timeout = setTimeout(() => {
+      router.push(`/chat/${partnerName}`);
+    }, 3000);
+
     return () => clearTimeout(timeout);
-  }, [onClose]);
+  }, [partnerName, router]);
+
+  const handleClose = () => {
+    router.push(`/chat/${partnerName}`);
+  };
 
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
         <h2>¡Enhorabuena!</h2>
         <p>Ahora eres pareja de <strong>{partnerName}</strong></p>
-        <button className={styles.closeButton} onClick={onClose}>
+        <button className={styles.closeButton} onClick={handleClose}>
           Cerrar
         </button>
       </div>

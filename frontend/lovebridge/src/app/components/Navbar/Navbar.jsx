@@ -44,20 +44,26 @@ export default function NavBar() {
           {isLoggedIn && (
             <>
             <div className="d-flex align-items-center ms-auto d-lg-none">
-            <button
-              className="btn btn-link"
-              onClick={() => setShowSearchModal(true)}
-              aria-label="Buscar perfil">
-              <i className="bi bi-search-heart"></i>
-            </button>
-            
+              <button
+                className="btn btn-link"
+                onClick={() => setShowSearchModal(true)}
+                aria-label="Buscar perfil">
+                <i className="bi bi-search-heart"></i>
+              </button>
+              
 
-            <button
-              className="btn btn-link"
-              onClick={() => setShowNotifications((prev) => !prev)}
-              aria-label="Ver notificaciones">
-              <i className="bi bi-bell fs-4"></i>
-            </button>
+              <button
+                className="btn btn-link"
+                onClick={() => setShowNotifications((prev) => !prev)}
+                aria-label="Ver notificaciones">
+                <i className="bi bi-bell fs-4"></i>
+              </button>
+              <button className='btn btn-link'>
+                  <Link href="/chat/Sebastian" aria-label="Ir al chat con Sofia">
+                    <i className="bi bi-chat-heart fs-4"></i>
+                  </Link>
+                </button>
+                  
             </div>
             </>
           )}
@@ -137,6 +143,9 @@ export default function NavBar() {
                       aria-label="Ver notificaciones">
                       <i className="bi bi-bell fs-4"></i>
                     </button>
+               
+                      
+
                   </div>
                   <button type="button" className="btn btn-outline" onClick={handleLogout}>
                     Logout

@@ -66,3 +66,26 @@
   }
 }
 
+.floatingChatButton {
+  position: fixed;
+  bottom: 90px; // similar a notificaciones
+  right: 20px;
+  z-index: 1050;
+  background-color: #ff6b6c;
+  color: white;
+  border-radius: 50%;
+  padding: 12px 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+  text-align: center;
+
+  &:hover {
+    background-color: #e05252;
+    text-decoration: none;
+  }
+
+  i {
+    display: block;
+    margin: 0;
+  }
+}
